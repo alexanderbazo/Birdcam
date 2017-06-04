@@ -9,7 +9,14 @@
       this.height = options.height;
       this.el = this.createElement(options.template);
       this.setSize(this.width, this.height);
-      this.fullScreen = false;
+      document.addEventListener("fullscreenchange", this.onFullScreenChanged
+        .bind(this));
+      document.addEventListener("mozfullscreenchange", this.onFullScreenChanged
+        .bind(this));
+      document.addEventListener("msfullscreenchange", this.onFullScreenChanged
+        .bind(this));
+      document.addEventListener("webkitfullscreenchange", this.onFullScreenChanged
+        .bind(this));
     }
 
     createElement(template) {
@@ -27,9 +34,7 @@
         "[data-resize='true']")
       this.el.style.width = width + "px";
       this.el.style.height = height + "px";
-
       for (var el in relevantChildren.entries()) {
-        console.log(el);
         el.style.width = width + "px";
         el.style.height = height + "px";
         el.width = width;
@@ -37,8 +42,54 @@
       }
     }
 
-    toggleFullScreen() {
+    onFullScreenChanged() {
+      var fullScreenIsActivated = this.isFullScreen();
+      if (fullScreenIsActivated === true) {
+        let ratio = Math.min(window.innerWidth/this.width, window.innerHeight/this.height); 
+        this.setSize(this.width * ratio, this.height * ratio);
+      } else {
+        this.setSize(this.width, this.height);
+      }
+    }
 
+    isFullScreen() {
+      var isFullScreen = document.fullscreen || document.mozIsFullscreen ||
+        document.msIsFullscreen || document.webkitIsFullScreen || false;
+      return isFullScreen;
+    }
+
+    enterFullScreen() {
+      var element = this.el;
+      if (element.requestFullscreen) {
+        element.requestFullscreen();
+      } else if (element.mozRequestFullScreen) {
+        element.mozRequestFullScreen();
+      } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+      } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+      }
+    }
+
+    exitFullScreen() {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.msCancelFullScreen) {
+        document.msCancelFullScreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      }
+    }
+
+    toggleFullScreen() {
+      var fullScreenIsActivated = this.isFullScreen();
+      if (fullScreenIsActivated === true) {
+        this.exitFullScreen();
+      } else {
+        this.enterFullScreen();
+      }
     }
   }
 

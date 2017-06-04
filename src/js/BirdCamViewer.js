@@ -23,10 +23,10 @@
     }
 
     onStreamLoadingFailed() {
+      this.hint.innerHTML = BirdCamViewer.MSG_CONNECTION_FAILED;
       this.dispatchEvent({
         type: "streamLoadingFailed"
       });
-      this.hint.innerHTML = BirdCamViewer.MSG_CONNECTION_FAILED;
     }
 
     onStreamLoaded() {
