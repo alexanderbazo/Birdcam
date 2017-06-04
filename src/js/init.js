@@ -1,7 +1,7 @@
 /* eslint-env browser */
 (function(context) {
   BirdCam.init({
-    source: "/camera/stream.mjpg",
+    stream: "/camera/stream.mjpg",
     width: 800,
     height: 480,
   });
