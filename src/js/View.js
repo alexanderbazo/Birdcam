@@ -53,8 +53,8 @@
     }
 
     isFullScreen() {
-      var isFullScreen = document.fullscreen || document.mozIsFullscreen ||
-        document.msIsFullscreen || document.webkitIsFullScreen || false;
+      var isFullScreen = document.fullscreen || document.mozFullScreen ||
+        document.msFullScreen || document.webkitIsFullScreen || false;
       return isFullScreen;
     }
 
@@ -78,8 +78,8 @@
         document.mozCancelFullScreen();
       } else if (document.msCancelFullScreen) {
         document.msCancelFullScreen();
-      } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
+      } else if (document.webkitCancelFullScreen) {
+        document.webkitCancelFullScreen();
       }
     }
 
