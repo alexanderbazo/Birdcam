@@ -1,0 +1,23 @@
+{
+  "name": "birdcam",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rm -rf tmp; rm -rf build && mkdir build",
+    "premake": "npm run-script clean; mkdir tmp",
+    "make": "node build.js",
+    "postmake": "rm -rf tmp",
+    "start": "node run.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "fs-extra": "^3.0.1",
+    "node-minify": "^2.1.1"
+  },
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}
