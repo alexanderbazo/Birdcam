@@ -19,6 +19,13 @@
     color: rgb(197, 255, 255);
 }
 
+.birdcam-viewer .header .title {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 5px;
+}
+
 .birdcam-viewer .header .indicator {
     display: block;
     position: absolute;
@@ -110,13 +117,11 @@
     line-height: 36px;
     font-size: 26px;
     color: rgb(197, 255, 255);
-    -webkit-text-stroke: 2px rgb(6, 51, 51);
 }
 
 .birdcam-viewer .tools li:hover {
     cursor: pointer;
     color: rgb(6, 51, 51);
-    -webkit-text-stroke: 2px rgb(197, 255, 255);
 
 }
 

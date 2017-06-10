@@ -31,10 +31,10 @@
 
     setSize(width, height) {
       var relevantChildren = this.el.querySelectorAll(
-        "[data-resize='true']")
+        "[data-resize='true']");
       this.el.style.width = width + "px";
       this.el.style.height = height + "px";
-      for (var el in relevantChildren.entries()) {
+      for (let el in relevantChildren.entries()) {
         el.style.width = width + "px";
         el.style.height = height + "px";
         el.width = width;
@@ -45,7 +45,8 @@
     onFullScreenChanged() {
       var fullScreenIsActivated = this.isFullScreen();
       if (fullScreenIsActivated === true) {
-        let ratio = Math.min(window.innerWidth/this.width, window.innerHeight/this.height); 
+        let ratio = Math.min(window.innerWidth / this.width, window.innerHeight /
+          this.height);
         this.setSize(this.width * ratio, this.height * ratio);
       } else {
         this.setSize(this.width, this.height);

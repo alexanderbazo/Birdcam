@@ -1,5 +1,6 @@
 /* eslint-env browser */
-/* global BirdCam */
+/* global BirdCam, View */
+
 (function(context) {
   "use strict";
   class BirdCamViewer extends View {
@@ -11,21 +12,25 @@
       });
       this.image = this.el.querySelector(".image");
       this.canvas = this.el.querySelector(".canvas");
+      this.canvas.width = this.width;
+      this.canvas.height = this.height;
       this.hint = this.el.querySelector(".hint");
       this.hint.innerHTML = BirdCamViewer.MSG_TRYING_TO_CONNECT;
       this.tools = this.el.querySelector(".tools");
       this.indicator = this.el.querySelector(".indicator");
       this.hint.style["line-height"] = this.height + "px";
-      this.tools.querySelector(".icon-camera").addEventListener("click",
+      this.tools.querySelector(".icon-screenshot").addEventListener("click",
         this.onScreenshotButtonClicked.bind(this));
-      this.tools.querySelector(".icon-resize-full-alt").addEventListener(
+      this.tools.querySelector(".icon-fullscreen").addEventListener(
         "click", this.onFullscreenButtonClicked.bind(this));
+      this.tools.querySelector(".icon-sound").addEventListener(
+        "click", this.onPlaySoundButtonClicked.bind(this));
     }
 
     onStreamLoadingFailed() {
       this.hint.innerHTML = BirdCamViewer.MSG_CONNECTION_FAILED;
       this.dispatchEvent({
-        type: "streamLoadingFailed"
+        type: "streamLoadingFailed",
       });
     }
 
@@ -35,7 +40,7 @@
       this.indicator.classList.remove("offline");
       this.indicator.classList.add("online");
       this.dispatchEvent({
-        type: "streamLoaded"
+        type: "streamLoaded",
       });
     }
 
@@ -50,6 +55,12 @@
       this.toggleFullScreen();
     }
 
+    onPlaySoundButtonClicked() {
+      this.dispatchEvent({
+        type: "soundRequested",
+      });
+    }
+
     connectToStream(stream) {
       this.image.onload = this.onStreamLoaded.bind(this);
       this.image.onerror = this.onStreamLoadingFailed.bind(this);
@@ -57,16 +68,19 @@
     }
 
     get currentFrame() {
-      this.canvas.getContext("2d").drawImage(this.image, 0, 0, this.canvas.width, this.canvas
+      this.canvas.getContext("2d").drawImage(this.image, 0, 0, this.canvas.width,
+        this.canvas
         .height);
       return this.canvas.toDataURL("image/jpeg", 1.0);
     }
   }
 
-  BirdCamViewer.MSG_TRYING_TO_CONNECT = "Bitte warten. Die Verbindung zur Kamera wird aufgebaut.";
-  BirdCamViewer.MSG_CONNECTION_FAILED = "Verbindung zur Kamera konnte nicht aufgebaut werden";
+  BirdCamViewer.MSG_TRYING_TO_CONNECT =
+    "Bitte warten. Die Verbindung zur Kamera wird aufgebaut.";
+  BirdCamViewer.MSG_CONNECTION_FAILED =
+    "Verbindung zur Kamera konnte nicht aufgebaut werden";
   BirdCamViewer.HTML =
-    "<div class='birdcam-viewer'><div class='header'><span class='indicator offline'></span><i class='icon-twitter-bird'></i>BirdCam</div><div class='hint' data-resize='true'></div><img class='image hidden' data-resize='true'/><canvas class='canvas hidden' data-resize='true'></canvas><ul class='tools'><li class='button icon-camera'></li><li class='button icon-resize-full-alt'></li></ul></div>";
+    "<div class='birdcam-viewer'><div class='header'><span class='indicator offline'></span><span class='title'>BirdCam</span></div><div class='hint' data-resize='true'></div><img class='image' data-resize='true'/><canvas class='canvas hidden' data-resize='false'></canvas><ul class='tools'><li class='button icon-screenshot'></li><li class='button icon-fullscreen'></li><li class='button icon-sound'></li></ul></div>";
   context.CamViewer = BirdCamViewer;
 
 }(BirdCam));

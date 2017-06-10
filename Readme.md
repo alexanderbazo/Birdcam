@@ -1,5 +1,5 @@
 # BirdCam
-A JavaScript frontend to view MJPEG Streams and take screenshots. Developed for a local bird feeder webcam.
+A JavaScript frontend to view MJPEG Streams from a local bird feeder webcam. Supports creating of screenshots and playing sounds to chase away pigeons.
 
 ![Screenshot](/docs/sample.png)
 
@@ -11,6 +11,6 @@ A JavaScript frontend to view MJPEG Streams and take screenshots. Developed for 
 * Run `npm start` to start local instance
 
 ## License
-This project is using icon fonts from fontello.com: *Font Awesome* by Dave Gandy and *Modern Pictograms* by John Caserta. Both fonts are released under SIL. The fontello css file is released under MIT license. 
+This project is using icon fonts from [fontello.com](http://fontello.com): *Font Awesome* by Dave Gandy, released under SIL. The fontello css file is released under MIT license. 
 
-All other code in this repository is released under MIT license.
+All other code, sounds and images in this repository is released under MIT license.
