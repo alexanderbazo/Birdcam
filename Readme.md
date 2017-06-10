@@ -13,4 +13,4 @@ A JavaScript frontend to view MJPEG Streams from a local bird feeder webcam. Sup
 ## License
 This project is using icon fonts from [fontello.com](http://fontello.com): *Font Awesome* by Dave Gandy, released under SIL. The fontello css file is released under MIT license. 
 
-All other code, sounds and images in this repository is released under MIT license.
+All other code, sounds and images in this repository are released under MIT license.
